@@ -32,7 +32,7 @@ public class Voice_App extends Application {
             .setBattery("0")// 是否有电池，1为有电池，0为没有电池
             .setVadMode("LOCAL")// 当前语音设备使用模式LOCAL 或 CLOUD
             .setCmei(Utils.getCmccDeviceCmei())
-            .setMac(Utils.getCmccDeviceCmei().replace(":", ""))
+            .setMac(Utils.getWirelessMacAddress(mContext).replace(":", ""))
             .setDeviceMac(Utils.getWirelessMacAddress(mContext))
             .setChips(new Chips().setFactory("Hisilicon").setModel(Utils.getCmccProductClass()).setType("WiFi/BLE").toString())
             .setDmAppId(Utils.getCmccDmAppId());
@@ -100,7 +100,8 @@ public class Voice_App extends Application {
             @Override
             public boolean otaUpdateResult(String result) {
                 Log.d(TAG, "otaUdateResult:    " + result);
-                return true;
+                return super.otaUpdateResult(result);
+                //return true;
             }
         });
 
